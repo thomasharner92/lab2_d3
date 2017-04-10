@@ -1,0 +1,17 @@
+ID,Region,REGC2017_N,Population,Unemployment,Median_Income,Median_Age,Car_Commute,Pct_Native,Wine_Hectares
+1,Northland,Northland Region,73599,0.097,23400,42.7,0.668,0.844,510.54
+2,Aukland,Auckland Region,1415550,0.081,29600,35.1,0.654,0.609,3559.78
+3,Waikato,Waikato Region,403638,0.075,27900,37.7,0.654,0.821,714.19
+4,Bay of Plenty,Bay of Plenty Region,267741,0.09,26200,40.6,0.667,0.827,1040.88
+5,Gisborne,Gisborne Region,43656,0.093,24400,37,0.638,0.903,8112.35
+6,Hawkes Bay,Hawkes Bay Region,151179,0.07,26100,40.6,0.669,0.853,17689.11
+7,Taranaki,Taranaki Region,109608,0.056,29100,39.9,0.651,0.872,19.15
+8,Manawatu-Wanganui,Manawatu-Wanganui Region,222672,0.078,25000,39.3,0.643,0.859,132.3
+9,Wellington,Wellington Region,471315,0.072,32700,37.2,0.484,0.747,2918.89
+10,West Coast,West Coast Region,32148,0.047,26900,42.8,0.552,0.89,0
+11,Canterbury,Canterbury Region,539436,0.044,30100,39.9,0.639,0.804,4298.05
+12,Otago,Otago Region,202467,0.056,26300,39,0.607,0.818,4144.57
+13,Southland,Southland Region,93339,0.047,29500,38,0.631,0.898,0
+14,Tasman,Tasman Region,47157,0.04,25700,44.2,0.625,0.822,6475.57
+15,Nelson,Nelson Region,46437,0.059,27200,42.5,0.598,0.788,1123
+16,Marlborough,Marlborough Region,43416,0.045,27900,45,0.62,0.84,54824.52

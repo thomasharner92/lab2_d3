@@ -1,0 +1,63 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>README.md</title>
+      </head>
+      <body>
+        <h1 id="topojson">TopoJSON</h1>
+<p><strong>TopoJSON</strong> is an extension of GeoJSON that encodes topology. Rather than representing geometries discretely, geometries in TopoJSON files are stitched together from shared line segments called <em>arcs</em>. This technique is similar to <a href="http://www.cartogis.org/docs/proceedings/2006/bloch_harrower.pdf">Matt Bloch’s MapShaper</a> and the <a href="http://indiemaps.com/blog/2009/02/e00parser-an-actionscript-3-parser-for-the-arcinfo-export-topological-gis-format/">Arc/Info Export format, .e00</a>.</p>
+<p>TopoJSON eliminates redundancy, allowing related geometries to be stored efficiently in the same file. For example, the shared boundary between California and Nevada is represented only once, rather than being duplicated for both states. A single TopoJSON file can contain multiple feature collections without duplication, such as states and counties. Or, a TopoJSON file can efficiently represent both polygons (for fill) and boundaries (for stroke) as two feature collections that share the same arc mesh. See <a href="https://bost.ocks.org/mike/topology/">How To Infer Topology</a> for a visual explanation of how TopoJSON works.</p>
+<p>To further reduce file size, TopoJSON can use quantized delta-encoding for integer coordinates. This is similar to rounding coordinate values (e.g., <a href="https://github.com/migurski/LilJSON">LilJSON</a>), but with greater efficiency and control over loss of information. And like GeoJSON, TopoJSON files are easily modified in a text editor and amenable to gzip compression.</p>
+<p>As a result, TopoJSON is substantially more compact than GeoJSON, frequently offering a reduction of 80% or more even without simplification. Yet encoding topology also has numerous useful applications for maps and visualization above! It allows <a href="https://github.com/topojson/topojson-simplify">topology-preserving shape simplification</a>, which ensures that adjacent features remain connected after simplification; this applies even across feature collections, such as simultaneous consistent simplification of state and county boundaries. Topology can also be used for <a href="http://www.ncgia.ucsb.edu/projects/Cartogram_Central/types.html">Dorling</a> or <a href="http://pitchinteractive.com/latest/tilegrams-more-human-maps/">hexagonal cartograms</a>, as well as other techniques that need shared boundary information such as <a href="https://bl.ocks.org/4188334">automatic map coloring</a>.</p>
+<h2 id="installing">Installing</h2>
+<p>If you use NPM, <code>npm install topojson</code>. Otherwise, download the <a href="https://github.com/topojson/topojson/releases/latest">latest release</a>. You can also load directly from <a href="https://d3js.org">d3js.org</a> as a <a href="https://d3js.org/topojson.v2.min.js">standalone library</a>. AMD, CommonJS, and vanilla environments are supported. In vanilla, a <code>topojson</code> global is exported:</p>
+<pre><code class="lang-html">&lt;script src=&quot;https://d3js.org/topojson.v2.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+
+var topology = topojson.topology({foo: geojson});
+
+&lt;/script&gt;
+</code></pre>
+<p><a href="https://tonicdev.com/npm/topojson">Try topojson in your browser.</a></p>
+<h2 id="api-reference">API Reference</h2>
+<h3 id="generation-topojson-server-">Generation (topojson-server)</h3>
+<ul>
+<li><a href="https://github.com/topojson/topojson-server/blob/master/README.md#topology">topojson.topology</a> - convert GeoJSON to TopoJSON.</li>
+</ul>
+<h3 id="simplification-topojson-simplify-">Simplification (topojson-simplify)</h3>
+<ul>
+<li><a href="https://github.com/topojson/topojson-simplify/blob/master/README.md#presimplify">topojson.presimplify</a> - prepare TopoJSON for simplification.</li>
+<li><a href="https://github.com/topojson/topojson-simplify/blob/master/README.md#simplify">topojson.simplify</a> - simplify geometry by removing coordinates.</li>
+<li><a href="https://github.com/topojson/topojson-simplify/blob/master/README.md#quantile">topojson.quantile</a> - compute a simplification threshold.</li>
+<li><a href="https://github.com/topojson/topojson-simplify/blob/master/README.md#filter">topojson.filter</a> - remove rings from a topology.</li>
+<li><a href="https://github.com/topojson/topojson-simplify/blob/master/README.md#filterAttached">topojson.filterAttached</a> - remove detached rings.</li>
+<li><a href="https://github.com/topojson/topojson-simplify/blob/master/README.md#filterWeight">topojson.filterWeight</a> - remove small rings.</li>
+<li><a href="https://github.com/topojson/topojson-simplify/blob/master/README.md#planarRingArea">topojson.planarRingArea</a> - compute the planar area of a ring.</li>
+<li><a href="https://github.com/topojson/topojson-simplify/blob/master/README.md#planarTriangleArea">topojson.planarTriangleArea</a> - compute the planar area of a triangle.</li>
+<li><a href="https://github.com/topojson/topojson-simplify/blob/master/README.md#sphericalRingArea">topojson.sphericalRingArea</a> - compute the spherical area of a ring.</li>
+<li><a href="https://github.com/topojson/topojson-simplify/blob/master/README.md#sphericalTriangleArea">topojson.sphericalTriangleArea</a> - compute the spherical area of a triangle.</li>
+</ul>
+<h3 id="manipulation-topojson-client-">Manipulation (topojson-client)</h3>
+<ul>
+<li><a href="https://github.com/topojson/topojson-client/blob/master/README.md#feature">topojson.feature</a> - convert TopoJSON to GeoJSON.</li>
+<li><a href="https://github.com/topojson/topojson-client/blob/master/README.md#merge">topojson.merge</a> - merge TopoJSON geometry and convert to GeoJSON polygons.</li>
+<li><a href="https://github.com/topojson/topojson-client/blob/master/README.md#mergeArcs">topojson.mergeArcs</a> - merge TopoJSON geometry to form polygons.</li>
+<li><a href="https://github.com/topojson/topojson-client/blob/master/README.md#mesh">topojson.mesh</a> - mesh TopoJSON geometry and convert to GeoJSON lines.</li>
+<li><a href="https://github.com/topojson/topojson-client/blob/master/README.md#meshArcs">topojson.meshArcs</a> - mesh TopoJSON geometry to form lines.</li>
+<li><a href="https://github.com/topojson/topojson-client/blob/master/README.md#neighbors">topojson.neighbors</a> - compute adjacent features.</li>
+<li><a href="https://github.com/topojson/topojson-client/blob/master/README.md#bbox">topojson.bbox</a> - compute the bounding box of a topology.</li>
+<li><a href="https://github.com/topojson/topojson-client/blob/master/README.md#quantize">topojson.quantize</a> - round coordinates, reducing precision.</li>
+<li><a href="https://github.com/topojson/topojson-client/blob/master/README.md#transform">topojson.transform</a> - remove delta-encoding and apply a transform.</li>
+<li><a href="https://github.com/topojson/topojson-client/blob/master/README.md#untransform">topojson.untransform</a> - apply delta-encoding and remove a transform.</li>
+</ul>
+<h2 id="command-line-reference">Command-Line Reference</h2>
+<ul>
+<li><a href="https://github.com/topojson/topojson-server/blob/master/README.md#geo2topo">geo2topo</a> - convert GeoJSON to TopoJSON.</li>
+<li><a href="https://github.com/topojson/topojson-simplify/blob/master/README.md#toposimplify">toposimplify</a> - simplify TopoJSON, removing coordinates.</li>
+<li><a href="https://github.com/topojson/topojson-client/blob/master/README.md#topo2geo">topo2geo</a> - convert TopoJSON to GeoJSON.</li>
+<li><a href="https://github.com/topojson/topojson-client/blob/master/README.md#topomerge">topomerge</a> - merge TopoJSON geometry, and optionally filter.</li>
+<li><a href="https://github.com/topojson/topojson-client/blob/master/README.md#topoquantize">topoquantize</a> - round TopoJSON, reducing precision.</li>
+</ul>
+
+      </body>
+    </html>
